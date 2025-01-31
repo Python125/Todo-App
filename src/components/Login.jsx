@@ -19,7 +19,9 @@ function Login() {
                 <button type="submit" onClick={loginAccount}>Login</button>
 
                 <h2>Find your account below</h2>
-                <li>Test</li>
+                <ul>
+                    <li>Test</li>
+                </ul>
             </form>
         </div>
     )
