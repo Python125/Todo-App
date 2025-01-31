@@ -1,21 +1,32 @@
 import { useState, React } from 'react';
 
 function Login() {
-    const [email, setEmail] = useState('');
+    const [users, setUsers] = useState([]);
+    const [userEmail, setUserEmail] = useState('');
 
     const loginAccount = (e) => {
-        e.preventDefault();
+        setUserEmail(e.target.value);
     }
 
+    const addUser = (e) => {
+        e.preventDefault();
+
+        const newUser = {
+            id: users.length + 1,
+            email: userEmail,
+            todos: [],
+        }
+    }
+    
     return (
         <div>
             <h1>Login to your account</h1>
             <form>
-                <input type="text" value={email} onChange={setEmail} />
+                <input type="text" value={userEmail} onChange={loginAccount} />
                 <button type="submit" onClick={handleUserChange}>Login</button>
                 <h2>Find your account below</h2>
                 <ul>
-                    <li>{email}</li>
+                    <li>{userEmail}</li>
                 </ul>
             </form>
         </div>
