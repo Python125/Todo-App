@@ -5,9 +5,11 @@ import App from './App.jsx';
 // import ReactDOM from 'react-dom';
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </StrictMode>
+  <StrictMode>
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+          </Routes>
+      </BrowserRouter>
+  </StrictMode>
 )
