@@ -23,7 +23,9 @@ function TodoList() {
         console.log(newTodo);
 
         axios.post(`${apiURL}/users/${userId}/todos`, newTodo).then(response => {
-            setTodos([])
+            setTodos([]);
+            setTodoInput('');
+            setEditTodoId(null);
         })
     }
 
