@@ -8,7 +8,7 @@ function Login() {
     }
 
     const handleUserChange = () => {
-        navigate('/todo');
+        navigate('/incomplete');
     }
 
     return (
@@ -17,12 +17,11 @@ function Login() {
             <form>
                 <input type="text" value={email} onChange={setEmail} />
                 <button type="submit" onClick={loginAccount}>Login</button>
-
-                <h2>Find your account below</h2>
-                <ul>
-                    <li>Test</li>
-                </ul>
             </form>
+            <h2>Find your account below</h2>
+            <ul>
+                <li>Test</li>
+            </ul>
         </div>
     )
 }

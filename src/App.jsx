@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <button onClick={Login}><Login /></button>
+      <Login />
     </div>
   )
 }
