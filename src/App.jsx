@@ -1,18 +1,26 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, React } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState('');
+
+
+  const loginAccount = (e) => {
+    e.preventDefault();
+  }
 
   return (
-    <>
-      <h1>Login to your account</h1>
+    <div>
+      <h1>Create an account</h1>
       <form>
-        <input type="text" placeholder="Email" />
-        <button type="submit">Login</button>
+        <input type="text" value={email} onChange={setEmail} />
+        <button type="submit" onClick={loginAccount}>Login</button>
+
+        <h2>Find your account below</h2>
+        <li>{email}</li>
       </form>
-    </>
+    </div>
   )
 }
 
-export default App
+export default App;
