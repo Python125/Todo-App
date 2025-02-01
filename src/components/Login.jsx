@@ -1,8 +1,21 @@
-import { useState, React } from 'react';
+import { useState, React, useEffect } from 'react';
+// import axios from 'axios';
 
 function Login() {
     const [users, setUsers] = useState([]);
     const [userEmail, setUserEmail] = useState('');
+
+    // const apiURL = process.env.REACT_API_URL;
+    // console.log(`API URL: ${apiURL}`);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const response = await axios.get(`${apiURL}/users`);
+            setUsers(response.data);
+        }
+        fetchUsers();
+
+    }, [])
 
     const loginAccount = (e) => {
         setUserEmail(e.target.value);

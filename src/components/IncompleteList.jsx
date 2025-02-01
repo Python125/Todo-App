@@ -1,9 +1,31 @@
-import { useState, React } from 'react';
+import { useState, React, useEffect } from 'react';
+import axios from 'axios';
+import CompletedList from './CompletedList';
+import OverdueList from './OverdueList';
 
 function TodoList() {
     const [todos, setTodos] = useState([]);
     const [todoInput, setTodoInput] = useState('');
     const [editTodoId, setEditTodoId] = useState(null);
+    const [dueDate, setDueDate] = useState('');
+
+    // const apiURL = process.env.REACT_API_URL;
+    // console.log(`API URL: ${apiURL}`);
+
+    useEffect(() => {
+        const fetchTodos = async () => {
+            const response = await axios.get(`${apiURL}/users/${userId}/todos`);
+            const updatedTodos = response.data.map(todo => {
+                if (!todo.completed && new Date(todo.dueDate) < new Date()) {
+                  return { ...todo, overdue: true };
+                } else {
+                  return { ...todo, overdue: false };
+                }
+              });
+            setTodos(updatedTodos);
+        }
+        fetchTodos();
+    }, [])
 
     const addTodo = (e) => {
         setTodoInput(e.target.value);
