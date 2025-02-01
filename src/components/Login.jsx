@@ -22,11 +22,11 @@ function Login() {
         <div>
             <h1>Login to your account</h1>
             <form>
-                <input type="text" value={userEmail} onChange={loginAccount} />
-                <button type="submit" onClick={handleUserChange}>Login</button>
+                <input type="text" />
+                <button type="submit">Login</button>
                 <h2>Find your account below</h2>
                 <ul>
-                    <li>{userEmail}</li>
+                    <li>Test</li>
                 </ul>
             </form>
         </div>
