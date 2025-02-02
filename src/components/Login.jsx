@@ -1,5 +1,5 @@
 import { useState, React, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 function Login() {
     const [users, setUsers] = useState([]);
@@ -9,7 +9,7 @@ function Login() {
         setUserInput(e.target.value);
     }
 
-    function loginUser(e) {
+    function submitUser(e) {
         e.preventDefault();
 
         const newUser = {
@@ -29,9 +29,9 @@ function Login() {
     return (
         <div>
             <h1>Login to your account</h1>
-            <form onSubmit={loginUser}>
+            <form onSubmit={submitUser}>
                 <input type="text" />
-                <button type="submit">Login</button>
+                <button type="submit">Add</button>
                 <h2>Find your account below</h2>
                 <ul>
                     {users.map(user => (
