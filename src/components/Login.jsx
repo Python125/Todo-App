@@ -11,6 +11,17 @@ function Login() {
 
     function loginUser(e) {
         e.preventDefault();
+
+        const newUser = {
+            id: users.length + 1,
+            email: userInput,
+            todos: [],
+        }
+        console.log(newUser);
+
+        axios.post(`${apiURL}/users`, newUser).then(response => {
+            setUsers([...users, response.data]);
+        })
     }
 
     const deleteUser = (id) => {}
@@ -18,7 +29,7 @@ function Login() {
     return (
         <div>
             <h1>Login to your account</h1>
-            <form>
+            <form onSubmit={loginUser}>
                 <input type="text" />
                 <button type="submit">Login</button>
                 <h2>Find your account below</h2>
