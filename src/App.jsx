@@ -1,5 +1,4 @@
 import { useState, React } from 'react';
-import './App.css';
 import Login from './components/Login';
 
 const apiURL = import.meta.env.REACT_API_URL;
@@ -9,7 +8,7 @@ function App() {
 
   return (
     <div>
-      <Login />
+      <h1>Hello World</h1>
     </div>
   )
 }

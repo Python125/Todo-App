@@ -8,6 +8,7 @@ function Login() {
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await axios.get(`${apiURL}/users`);
+            setUsers(response.data);
         }
         fetchUsers();
     }, [])
@@ -18,6 +19,7 @@ function Login() {
 
     function submitUser(e) {
         e.preventDefault();
+        if (!userInput.trim()) return;
 
         const newUser = {
             id: users.length + 1,
