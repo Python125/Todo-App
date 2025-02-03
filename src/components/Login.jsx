@@ -1,6 +1,9 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
 
+const apiURL = import.meta.env.REACT_API_URL;
+console.log(`API URL: ${apiURL}`);
+
 function Login() {
     const [users, setUsers] = useState([]);
     const [userInput, setUserInput] = useState('');
@@ -10,6 +13,7 @@ function Login() {
             const response = await axios.get(`${apiURL}/users`);
             setUsers(response.data);
         }
+        
         fetchUsers();
     }, [])
 
@@ -44,14 +48,14 @@ function Login() {
                 <input type="text" />
                 <button type="submit" onClick={addUser}>Add</button>
                 <h2>Find your account below</h2>
-                <ul>
-                    {users.map(user => (
-                        <li key={user.id}>
-                            <button onClick={() => loginAccount(user.email)}>Login</button>
-                            <button onClick={() => deleteUser(user.id)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
+                {/* <ul>
+                {users.map(user => (
+                    <li key={user.id}>
+                        <button onClick={() => loginAccount(user.email)}>Login</button>
+                        <button onClick={() => deleteUser(user.id)}>Delete</button>
+                    </li>
+                ))}
+                </ul> */}
             </form>
         </div>
     )

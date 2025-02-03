@@ -1,8 +1,8 @@
-import { useState, React } from 'react';
+import { useState, React, useEffect } from 'react';
 import Login from './components/Login';
 
-const apiURL = import.meta.env.REACT_API_URL;
-console.log(`API URL: ${apiURL}`);
+// const apiURL = import.meta.env.REACT_API_URL;
+// console.log(`API URL: ${apiURL}`);
 
 function App() {
 
