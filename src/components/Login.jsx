@@ -5,6 +5,13 @@ function Login() {
     const [users, setUsers] = useState([]);
     const [userInput, setUserInput] = useState('');
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const response = await axios.get(`${apiURL}/users`);
+        }
+        fetchUsers();
+    }, [])
+
     const addUser = (e) => {
         setUserInput(e.target.value);
     }
