@@ -24,14 +24,16 @@ function Login() {
         })
     }
 
-    const deleteUser = (id) => {}
+    const deleteUser = (id) => {
+        axios.delete(`${apiURL}/users/${id}`).then(response => {})
+    }
 
     return (
         <div>
             <h1>Login to your account</h1>
             <form onSubmit={submitUser}>
                 <input type="text" />
-                <button type="submit">Add</button>
+                <button type="submit" onClick={addUser}>Add</button>
                 <h2>Find your account below</h2>
                 <ul>
                     {users.map(user => (
