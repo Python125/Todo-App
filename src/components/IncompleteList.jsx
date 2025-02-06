@@ -1,7 +1,7 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
-import CompletedList from './CompletedList';
-import OverdueList from './OverdueList';
+// import CompletedList from './CompletedList';
+// import OverdueList from './OverdueList';
 
 function IncompleteList() {
     const [todos, setTodos] = useState([]);

@@ -47,7 +47,7 @@ function Login() {
             <form onSubmit={submitUser}>
                 <input type="text" />
                 <button type="submit" onClick={addUser}>Add</button>
-                <h2>Find your account below</h2>    
+                <h2>Find your account below</h2>
             </form>
         </div>
     )
