@@ -47,15 +47,7 @@ function Login() {
             <form onSubmit={submitUser}>
                 <input type="text" />
                 <button type="submit" onClick={addUser}>Add</button>
-                <h2>Find your account below</h2>
-                {/* <ul>
-                {users.map(user => (
-                    <li key={user.id}>
-                        <button onClick={() => loginAccount(user.email)}>Login</button>
-                        <button onClick={() => deleteUser(user.id)}>Delete</button>
-                    </li>
-                ))}
-                </ul> */}
+                <h2>Find your account below</h2>    
             </form>
         </div>
     )
