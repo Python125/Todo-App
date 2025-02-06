@@ -1,9 +1,6 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
 
-const apiURL = import.meta.env.REACT_API_URL;
-console.log(`API URL: ${apiURL}`);
-
 function Login() {
     const [users, setUsers] = useState([]);
     const [userInput, setUserInput] = useState('');
