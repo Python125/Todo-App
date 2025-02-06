@@ -1,11 +1,7 @@
 import { useState, React, useEffect } from 'react';
 // import axios from 'axios';
-// import CompleteList from './CompleteList';
-// import OverdueList from './OverdueList';
 
-
-
-function IncompleteList() {
+function TodoList() {
     const [todos, setTodos] = useState([]);
     const [todoInput, setTodoInput] = useState('');
     const [editTodoId, setEditTodoId] = useState(null);
@@ -13,14 +9,26 @@ function IncompleteList() {
 
     return (
         <div>
-            <h1>Incompleted</h1>
+            <h1>Incomplete</h1>
             <ul>
                 <li>Incomplete Todo</li>
             </ul>
-            <CompleteList todos={todos} />
+
+            <h1>Complete</h1>
+            <ul>
+                <li>Completed Todo</li>
+            </ul>
+
+            <h1>Overdue</h1>
+            <ul>
+                <li>Overdue Todo</li>
+            </ul>
         </div>
     )
+        
+
+
+
 }
 
-
-export default IncompleteList;
+export default TodoList;

@@ -31,24 +31,19 @@ function App() {
     }
     console.log(newUser);
 
-    axios.post(`${apiURL}/users`, newUser).then(request => {
-      setUsers([...users, request.data]);
+    axios.post(`${apiURL}/users`, newUser).then(response => {
+      setUsers([...users, response.data]);
+      setUserInput('');
     })
   }
-
-  // const deleteUser = (id) => {
-  //   axios.delete(`${apiURL}/users/${id}`).then(request => {
-  //     setUsers()
-  //   })
-  // }
 
   return (
     <div>
       <h1>Login to your account</h1>
       <form onSubmit={submitUser}>
-        <input type='text' />
+        <input type='text' value={userInput} onChange={addUser} />
         <button type="submit" onClick={addUser}>Add</button>
-        <h2>Find your account below</h2>
+        <h2>Find your username below</h2>
       </form>
       <ul>
         {users.map(user => {
