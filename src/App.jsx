@@ -9,8 +9,8 @@ function App() {
   const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
-    const displayUsers = () => {
-      const response = axios.get(`${apiURL}/users`);
+    const displayUsers = async () => {
+      const response = await axios.get(`${apiURL}/users`);
       setUsers(response.data);
     };
     displayUsers();
@@ -48,6 +48,16 @@ function App() {
         <button type="submit" onClick={addUser}>Add</button>
         <h2>Find your account below</h2>
       </form>
+      <ul>
+        {users.map(user => {
+          return (
+            <li key={user.id}>
+              {user.email}
+              <button onClick={() => deleteUser(user.id)}>Delete</button>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
