@@ -36,9 +36,11 @@ function App() {
     })
   }
 
-  const deleteUser = (id) => {
-    axios.delete(`${apiURL}/users/${id}`).then(request => {})
-  }
+  // const deleteUser = (id) => {
+  //   axios.delete(`${apiURL}/users/${id}`).then(request => {
+  //     setUsers()
+  //   })
+  // }
 
   return (
     <div>
@@ -52,8 +54,7 @@ function App() {
         {users.map(user => {
           return (
             <li key={user.id}>
-              {user.email}
-              <button onClick={() => deleteUser(user.id)}>Delete</button>
+              <a href={`/${user.id}/todos`}>{user.email}</a>
             </li>
           )
         })}

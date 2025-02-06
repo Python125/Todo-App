@@ -1,7 +1,9 @@
 import { useState, React, useEffect } from 'react';
-import axios from 'axios';
-// import CompletedList from './CompletedList';
+// import axios from 'axios';
+import CompleteList from './CompleteList';
 // import OverdueList from './OverdueList';
+
+
 
 function IncompleteList() {
     const [todos, setTodos] = useState([]);
@@ -11,12 +13,14 @@ function IncompleteList() {
 
     return (
         <div>
-            <h1>Incomplete List</h1>
+            <h1>Incompleted</h1>
             <ul>
                 <li>Incomplete Todo</li>
             </ul>
+            <CompleteList todos={todos} />
         </div>
     )
 }
+
 
 export default IncompleteList;
