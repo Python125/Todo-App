@@ -9,11 +9,11 @@ function App() {
   const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
-    const displayUsers = async () => {
+    const fetchUsers = async () => {
       const response = await axios.get(`${apiURL}/users`);
       setUsers(response.data);
     };
-    displayUsers();
+    fetchUsers();
   }, []);
 
   function addUser(e) {
@@ -49,7 +49,7 @@ function App() {
         {users.map(user => {
           return (
             <li key={user.id}>
-              <a href={`/${user.id}/todos`}>{user.email}</a>
+              <a href={`/${user.id}`}>{user.email}</a>
             </li>
           )
         })}

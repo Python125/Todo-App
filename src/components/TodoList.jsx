@@ -4,21 +4,19 @@ import axios from 'axios';
 const apiURL = import.meta.env.VITE_API_URL;
 console.log(`API URL: ${apiURL}`);
 
-function TodoList() {
+function TodoList({ userId }) {
     const [todos, setTodos] = useState([]);
     const [todoInput, setTodoInput] = useState('');
     const [editTodoId, setEditTodoId] = useState(null);
     const [dueDate, setDueDate] = useState('');
     const [calenderDate, setCalenderDate] = useState(null);
-
-    const userId = 1;
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         const fetchTodos = async () => {
             const response = await axios.get(`${apiURL}/users/${userId}/todos`);
             const updatedTodos = response.data.map(todo => {
                 if (!todo.completed && new Date(todo.dueDate) < new Date()) {
-
                     return { ...todo, overdue: true };
                 } else {
                     return { ...todo, overdue: false };
@@ -26,14 +24,21 @@ function TodoList() {
             });
             setTodos(updatedTodos);
         };
+
+        const fetchUser = async () => {
+            const response = await axios.get(`${apiURL}/users/${userId}`);
+            setUser(response.data.name);
+        }
+
         fetchTodos();
+        fetchUser();
 
         const interval = setInterval(() => {
             fetchTodos();
         }, 10000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [userId]);
 
     function addTodo(e) {
         setTodoInput(e.target.value);
@@ -92,10 +97,13 @@ function TodoList() {
 
     return (
         <div>
-            <h1>Incomplete</h1>
+            <h1>Welcome {user}</h1>
+            <h2>Incomplete</h2>
             <form onSubmit={submitTodo}>
                 <input type="text" value={todoInput} onChange={addTodo} />
+
                 <button type="submit" onClick={submitTodo}>Add</button>
+
             </form>
             <ul>
                 {todos.map(todo => {
@@ -107,12 +115,14 @@ function TodoList() {
 
 
             {
-            /* <h1>Complete</h1>
+            /* <h2>Complete</h2>
             <ul>
             </ul>
 
-            <h1>Overdue</h1>
+
+            <h2>Overdue</h2>
             <ul></ul> */
+
             }
         </div>
     )
