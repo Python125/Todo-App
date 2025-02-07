@@ -14,17 +14,9 @@ function TodoList({ userId }) {
 
     useEffect(() => {
         const fetchTodos = async () => {
-            const response = await axios.get(`${apiURL}/users/${userId}/todos`);
-            const userResponse = await axios.get(`${apiURL}/users/${userId}`);
-            const updatedTodos = response.data.map(todo => {
-                if (!todo.completed && new Date(todo.dueDate) < new Date()) {
-                    return { ...todo, overdue: true };
-                } else {
-                    return { ...todo, overdue: false };
-                }
-            });
-            setTodos(updatedTodos);
-            setUser(userResponse.data.email);
+            const response = await axios.get(`${apiURL}/users/${userId}`);
+            setTodos(response.data.todos);
+            setUser(response.data.email);
         };
 
         fetchTodos();
@@ -56,13 +48,14 @@ function TodoList({ userId }) {
             id: todos.length + 1,
             name: todoInput,
             completed: false,
-            dueDate: dueDate,
+            dueDate: dateTime.toISOString(),
             overdue: false,
             userId: userId,
         }
         console.log(newTodo);
 
         axios.post(`${apiURL}/users/${userId}/todos`, newTodo).then(response => {
+            console.log(response.data);
             setTodos([...todos, response.data]);
             setTodoInput('');
             setDueDate('');
@@ -110,7 +103,6 @@ function TodoList({ userId }) {
                     )
                 })}
             </ul>
-
 
             {
             /* <h2>Complete</h2>
