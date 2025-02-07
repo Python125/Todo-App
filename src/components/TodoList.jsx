@@ -15,6 +15,7 @@ function TodoList({ userId }) {
     useEffect(() => {
         const fetchTodos = async () => {
             const response = await axios.get(`${apiURL}/users/${userId}/todos`);
+            const userResponse = await axios.get(`${apiURL}/users/${userId}`);
             const updatedTodos = response.data.map(todo => {
                 if (!todo.completed && new Date(todo.dueDate) < new Date()) {
                     return { ...todo, overdue: true };
@@ -23,19 +24,15 @@ function TodoList({ userId }) {
                 }
             });
             setTodos(updatedTodos);
+            setUser(userResponse.data.email);
         };
 
-        const fetchUser = async () => {
-            const response = await axios.get(`${apiURL}/users/${userId}`);
-            setUser(response.data.email);
-        }
-
         fetchTodos();
-        fetchUser();
 
         const interval = setInterval(() => {
             fetchTodos();
         }, 10000);
+
 
         return () => clearInterval(interval);
     }, [userId]);
