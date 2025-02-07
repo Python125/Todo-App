@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useState, React, useEffect } from 'react';
 // import axios from 'axios';
 
+const apiURL = import.meta.env.VITE_API_URL;
+console.log(`API URL: ${apiURL}`);
+
 function TodoList() {
     const [todos, setTodos] = useState([]);
     const [todoInput, setTodoInput] = useState('');
@@ -10,10 +13,11 @@ function TodoList() {
     const [calenderDate, setCalenderDate] = useState(null);
 
     useEffect(() => {
-        const fetchTodos = () => {
-            const response = axios.get(`${apiURL}/users/${userId}/todos`);
+        const fetchTodos = async () => {
+            const response = await axios.get(`${apiURL}/users/${userId}/todos`);
             const updatedTodos = response.data.map(todo => {
                 if (!todo.completed && new Date(todo.dueDate) < new Date()) {
+
                     return { ...todo, overdue: true };
                 } else {
                     return { ...todo, overdue: false };
