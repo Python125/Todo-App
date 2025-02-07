@@ -98,15 +98,15 @@ function TodoList({ userId }) {
             <h2>Incomplete</h2>
             <form onSubmit={submitTodo}>
                 <input type="text" value={todoInput} onChange={addTodo} />
-
-
                 <button type="submit" onClick={submitTodo}>Add</button>
-
             </form>
             <ul>
                 {todos.map(todo => {
                     return (
-                        <li key={todo.id}>{todo.name}</li>
+                        <li key={todo.id}>
+                            {todo.name}
+                            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                        </li>
                     )
                 })}
             </ul>
@@ -117,10 +117,8 @@ function TodoList({ userId }) {
             <ul>
             </ul>
 
-
             <h2>Overdue</h2>
             <ul></ul> */
-
             }
         </div>
     )
