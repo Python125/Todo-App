@@ -27,7 +27,7 @@ function TodoList({ userId }) {
 
         const fetchUser = async () => {
             const response = await axios.get(`${apiURL}/users/${userId}`);
-            setUser(response.data.name);
+            setUser(response.data.email);
         }
 
         fetchTodos();
@@ -101,6 +101,7 @@ function TodoList({ userId }) {
             <h2>Incomplete</h2>
             <form onSubmit={submitTodo}>
                 <input type="text" value={todoInput} onChange={addTodo} />
+
 
                 <button type="submit" onClick={submitTodo}>Add</button>
 
