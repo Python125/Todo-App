@@ -18,15 +18,7 @@ function TodoList({ userId }) {
             setTodos(response.data.todos);
             setUser(response.data.email);
         };
-
         fetchTodos();
-
-        const interval = setInterval(() => {
-            fetchTodos();
-        }, 10000);
-
-
-        return () => clearInterval(interval);
     }, [userId]);
 
     function addTodo(e) {
@@ -55,7 +47,6 @@ function TodoList({ userId }) {
         console.log(newTodo);
 
         axios.post(`${apiURL}/users/${userId}/todos`, newTodo).then(response => {
-            console.log(response.data);
             setTodos([...todos, response.data]);
             setTodoInput('');
             setDueDate('');
@@ -66,7 +57,7 @@ function TodoList({ userId }) {
     const updateTodo = (id, name, dueDate) => {
         const newTodos = [...todos].map(todo => {
             if (todo.id === id) {
-                return { ...todo, name, dueDate };
+                return { ...todo, name: name, dueDate: dueDate };
             } else {
                 return todo;
             }
@@ -75,10 +66,18 @@ function TodoList({ userId }) {
         axios.put(`${apiURL}/users/${userId}/todos/${id}`, newTodos).then(() => {
             setTodos(newTodos);
             setEditTodoId(null);
-        })
+        });
     }
 
     const deleteTodo = (id) => {
+        const newTodos = [...todos].filter(todo => {
+            if (todo.id === id) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+        
         axios.delete(`${apiURL}/users/${userId}/todos/${id}`)
         .then(() => {
             setTodos(newTodos);
