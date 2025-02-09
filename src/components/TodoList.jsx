@@ -14,27 +14,11 @@ function TodoList({ userId }) {
 
     useEffect(() => {
         const fetchTodos = async () => {
-            const response = await axios.get(`${apiURL}/users/${userId}/todos`);
-            const userResponse = await axios.get(`${apiURL}/users/${userId}`);
-            const updatedTodos = response.data.map(todo => {
-                if (!todo.completed && new Date(todo.dueDate) < new Date()) {
-                    return { ...todo, overdue: true };
-                } else {
-                    return { ...todo, overdue: false };
-                }
-            });
-            setTodos(updatedTodos);
-            setUser(userResponse.data.email);
+            const response = await axios.get(`${apiURL}/users/${userId}`);
+            setTodos(response.data.todos);
+            setUser(response.data.email);
         };
-
         fetchTodos();
-
-        const interval = setInterval(() => {
-            fetchTodos();
-        }, 10000);
-
-
-        return () => clearInterval(interval);
     }, [userId]);
 
     function addTodo(e) {
@@ -56,7 +40,7 @@ function TodoList({ userId }) {
             id: todos.length + 1,
             name: todoInput,
             completed: false,
-            dueDate: dueDate,
+            dueDate: dateTime.toISOString(),
             overdue: false,
             userId: userId,
         }
@@ -73,7 +57,7 @@ function TodoList({ userId }) {
     const updateTodo = (id, name, dueDate) => {
         const newTodos = [...todos].map(todo => {
             if (todo.id === id) {
-                return { ...todo, name, dueDate };
+                return { ...todo, name: name, dueDate: dueDate };
             } else {
                 return todo;
             }
@@ -82,10 +66,18 @@ function TodoList({ userId }) {
         axios.put(`${apiURL}/users/${userId}/todos/${id}`, newTodos).then(() => {
             setTodos(newTodos);
             setEditTodoId(null);
-        })
+        });
     }
 
     const deleteTodo = (id) => {
+        const newTodos = [...todos].filter(todo => {
+            if (todo.id === id) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+        
         axios.delete(`${apiURL}/users/${userId}/todos/${id}`)
         .then(() => {
             setTodos(newTodos);
@@ -110,7 +102,6 @@ function TodoList({ userId }) {
                     )
                 })}
             </ul>
-
 
             {
             /* <h2>Complete</h2>
