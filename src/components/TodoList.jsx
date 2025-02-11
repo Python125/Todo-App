@@ -14,7 +14,7 @@ function TodoList({ userId }) {
     const [todoInput, setTodoInput] = useState('');
     const [editTodoId, setEditTodoId] = useState(null);
     const [dueDate, setDueDate] = useState('');
-    const [calenderDate, setCalenderDate] = useState(null);
+    const [calendarDate, setCalendarDate] = useState(null);
     const [user, setUser] = useState('');
 
     useEffect(() => {
@@ -22,9 +22,9 @@ function TodoList({ userId }) {
             const response = await axios.get(`${apiURL}/users/${userId}`);
             const updatedTodos = response.data.todos.map(todo => {
                 if (!todo.completed && new Date(todo.dueDate) < new Date()) {
-                    return { ...todo, overDue: true };
+                    return { ...todo, overdue: true };
                 } else {
-                    return { ...todo, overDue: false };
+                    return { ...todo, overdue: false };
                 }
             });
             setTodos(updatedTodos);
@@ -50,14 +50,15 @@ function TodoList({ userId }) {
 
     function submitTodo(e) {
         e.preventDefault();
-        if (!todoInput.trim() && !dueDate.trim()) return;
+        if (!todoInput.trim()) return;
+        if (!calendarDate) return;
 
-        const dateTime = new Date(calenderDate);
+        const dateTime = new Date(calendarDate);
         console.log(dateTime);
 
         const newTodo = {
             id: todos.length + 1,
-            name: todoInput,
+            name: todoInput.trim(),
             completed: false,
             dueDate: dateTime.toISOString(),
             overdue: false,
@@ -69,7 +70,7 @@ function TodoList({ userId }) {
             setTodos([...todos, response.data]);
             setTodoInput('');
             setDueDate('');
-            setCalenderDate(null);
+            setCalendarDate(null);
         })
     }
 
@@ -150,7 +151,7 @@ function TodoList({ userId }) {
                 <form onSubmit={submitTodo}>
                     <div style={{ width: '250px', margin: 'auto' }}>
                         <input style={{ width: '100%' }} type="text" value={todoInput} onChange={addTodo} />
-                        <DateTimePicker value={calenderDate} onChange={(newDate) => setCalenderDate(newDate)} onCancel={() => setCalenderDate(null)} placeholder="Select date and time" />
+                        <DateTimePicker value={calendarDate} onChange={(newDate) => setCalendarDate(newDate)} onCancel={() => setCalendarDate(null)} placeholder="Pick a date and time" />
                     </div>
                     <button type="submit" onClick={submitTodo}>Add Todo</button>
                 </form>
@@ -163,7 +164,7 @@ function TodoList({ userId }) {
                                     <EditTodo todo={todo} onSave={updateTodo} onCancel={() => setEditTodoId(null)} />
                                 ) : (
                                     <>
-                                        {todo.name} - Due: {format(new Date(todo.dueDate), 'M-d-yyyy hh:mm a')}
+                                        {todo.name} - Due: {format(new Date(todo.dueDate), 'M-d-yyyy h:mm a')}
                                         <button onClick={() => setEditTodoId(todo.id)}>Edit</button>
                                         <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                                         <button onClick={() => completeTodo(todo.id)}>Complete</button>
@@ -189,10 +190,10 @@ function TodoList({ userId }) {
 
                 <h2>Overdue</h2>
                 <ul>
-                    {todos.filter(todo => todo.overDue && !todo.completed).map(todo => {
+                    {todos.filter(todo => todo.overdue && !todo.completed).map(todo => {
                         return (
                             <li key={todo.id}>
-                                {todo.name} - Due: {format(new Date(todo.dueDate), 'M-d-yyyy hh:mm a')}
+                                {todo.name} - Due: {format(new Date(todo.dueDate), 'M-d-yyyy h:mm a')}
                             </li>
                         )
                     })}

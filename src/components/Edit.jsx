@@ -9,7 +9,7 @@ function EditTodo({ todo, onSave, onCancel }) {
     }
 
     const editDueDateHandler = (e) => {
-        setEditDueDate(new Date(e.target.value));
+        setEditDueDate(e.target.value);
     }
 
     const submitEditedTodo = (e) => {
