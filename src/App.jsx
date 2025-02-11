@@ -39,7 +39,7 @@ function App() {
   }
 
   return (
-    <Box bgColor="green.400" textAlign='center'>
+    <Box textAlign='center'>
       <Text fontWeight='bold' fontSize='2xl'>Login to your account</Text>
       <form onSubmit={submitUser}>
         <Input variant='subtle' width='200px' marginTop='15px' type='text' value={userInput} onChange={addUser} />

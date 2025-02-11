@@ -147,7 +147,7 @@ function TodoList({ userId }) {
 
     return (
         <MantineProvider>
-            <Box bgColor="green.400" textAlign='center'>
+            <Box textAlign='center'>
                 <Text fontWeight='bold' fontSize='2xl'>Welcome {user}</Text>
                 <form onSubmit={submitTodo}>
                     <div style={{ width: '250px', margin: 'auto' }}>
