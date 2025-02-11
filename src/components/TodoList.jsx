@@ -6,6 +6,7 @@ import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import EditTodo from './Edit';
+import { Text, Button, Input, Box } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -146,16 +147,16 @@ function TodoList({ userId }) {
 
     return (
         <MantineProvider>
-            <div style={{ backgroundColor: 'lightgreen' }}>
-                <h1>Welcome {user}</h1>
+            <Box bgColor="green.400" textAlign='center'>
+                <Text fontWeight='bold' fontSize='2xl'>Welcome {user}</Text>
                 <form onSubmit={submitTodo}>
                     <div style={{ width: '250px', margin: 'auto' }}>
-                        <input style={{ width: '100%' }} type="text" value={todoInput} onChange={addTodo} />
-                        <DateTimePicker value={calendarDate} onChange={(newDate) => setCalendarDate(newDate)} onCancel={() => setCalendarDate(null)} placeholder="Pick a date and time" />
+                        <Input variant='subtle' type="text" value={todoInput} onChange={addTodo} />
+                        <DateTimePicker value={calendarDate} onChange={(newDate) => setCalendarDate(newDate)} onCancel={() => setCalendarDate(null)} placeholder="Pick a date and time"/>
                     </div>
-                    <button type="submit" onClick={submitTodo}>Add Todo</button>
+                    <Button variant='surface' marginTop='3' width='100px' fontWeight='bold' type="submit" onClick={submitTodo}>Add Todo</Button>
                 </form>
-                <h2>Incomplete</h2>
+                <Text fontWeight='bold' fontSize='xl' marginTop='5'>Incomplete</Text>
                 <ul>
                     {incompleteTodo.map(todo => {
                         return (
@@ -165,9 +166,9 @@ function TodoList({ userId }) {
                                 ) : (
                                     <>
                                         {todo.name} - Due: {format(new Date(todo.dueDate), 'M-d-yyyy h:mm a')}
-                                        <button onClick={() => setEditTodoId(todo.id)}>Edit</button>
-                                        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                                        <button onClick={() => completeTodo(todo.id)}>Complete</button>
+                                        <Button variant='surface' marginLeft='2' marginTop='2' width='100px' fontWeight='bold' onClick={() => setEditTodoId(todo.id)}>Edit</Button>
+                                        <Button variant='surface' marginLeft='2' marginTop='2' width='100px' fontWeight='bold' onClick={() => deleteTodo(todo.id)}>Delete</Button>
+                                        <Button variant='surface' marginLeft='2' marginTop='2' width='100px' fontWeight='bold' onClick={() => completeTodo(todo.id)}>Complete</Button>
                                     </>
                                 )}
                             </li>
@@ -175,20 +176,20 @@ function TodoList({ userId }) {
                     })}
                 </ul>
 
-                <h2>Complete</h2>
+                <Text fontWeight='bold' fontSize='xl' marginTop='5'>Complete</Text>
                 <ul>
                     {todos.filter(todo => todo.completed).map(todo => {
                         return (
                             <li key={todo.id}>
                                 {todo.name}
-                                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                                <button onClick={() => undoCompleteTodo(todo.id)}>Undo</button>
+                                <Button variant='surface' marginLeft='2' marginTop='2' width='100px' fontWeight='bold' onClick={() => deleteTodo(todo.id)}>Delete</Button>
+                                <Button variant='surface' marginLeft='2' marginTop='2' width='100px' fontWeight='bold' onClick={() => undoCompleteTodo(todo.id)}>Undo</Button>
                             </li>
                         )
                     })}
                 </ul>
 
-                <h2>Overdue</h2>
+                <Text fontWeight='bold' fontSize='xl' marginTop='5'>Overdue</Text>
                 <ul>
                     {todos.filter(todo => todo.overdue && !todo.completed).map(todo => {
                         return (
@@ -198,7 +199,7 @@ function TodoList({ userId }) {
                         )
                     })}
                 </ul>
-            </div>
+            </Box>
         </MantineProvider>
     )
 }

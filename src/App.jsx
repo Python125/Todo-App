@@ -1,6 +1,7 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
-import { Text, Button, Input, Link } from '@chakra-ui/react';
+import { Text, Button, Input, Link, Box } from '@chakra-ui/react';
+
 const apiURL = import.meta.env.VITE_API_URL;
 console.log(`API URL: ${apiURL}`);
 
@@ -38,7 +39,7 @@ function App() {
   }
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <Box bgColor="green.400" textAlign='center'>
       <Text fontWeight='bold' fontSize='2xl'>Login to your account</Text>
       <form onSubmit={submitUser}>
         <Input variant='subtle' width='200px' marginTop='15px' type='text' value={userInput} onChange={addUser} />
@@ -54,7 +55,7 @@ function App() {
           )
         })}
       </ul>
-    </div>
+    </Box>
   )
 }
 

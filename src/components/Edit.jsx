@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, Input } from '@chakra-ui/react';
 
 function EditTodo({ todo, onSave, onCancel }) {
     const [editValue, setEditValue] = useState(todo.name);
@@ -26,10 +27,10 @@ function EditTodo({ todo, onSave, onCancel }) {
 
     return (
         <form onSubmit={submitEditedTodo}>
-            <input type="text" value={editValue} onChange={editTodo} />
-            <input value={editDueDate.toLocaleString()} onChange={editDueDateHandler} />
-            <button type="submit">Save</button>
-            <button onClick={onCancel}>Cancel</button>
+            <Input variant='subtle' width='250px' marginLeft='2' marginTop='5' type="text" value={editValue} onChange={editTodo} />
+            <Input variant='subtle' width='250px' marginLeft='2' marginTop='5' value={editDueDate.toLocaleString()} onChange={editDueDateHandler} />
+            <Button variant='surface' marginLeft='2' marginBottom='1' width='100px' fontWeight='bold' type="submit">Save</Button>
+            <Button variant='surface' marginLeft='2' marginBottom='1' width='100px' fontWeight='bold' onClick={onCancel}>Cancel</Button>
         </form>
     )
 }
