@@ -1,5 +1,6 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
+import { Text, Button, Input, Link, Box } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_API_URL;
 console.log(`API URL: ${apiURL}`);
@@ -38,23 +39,23 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Login to your account</h1>
+    <Box textAlign='center'>
+      <Text fontWeight='bold' fontSize='2xl'>Login to your account</Text>
       <form onSubmit={submitUser}>
-        <input type='text' value={userInput} onChange={addUser} />
-        <button type="submit" onClick={submitUser}>Add</button>
-        <h2>Find your username below</h2>
+        <Input variant='subtle' width='200px' marginTop='15px' type='text' value={userInput} onChange={addUser} />
+        <Button variant='surface' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' type="submit" onClick={submitUser}>Add</Button>
+        <Text fontWeight='bold' fontSize='xl' marginTop='5px'>Find your username below</Text>
       </form>
       <ul>
         {users.map(user => {
           return (
             <li key={user.id}>
-              <a href={`/${user.id}`}>{user.email}</a>
+              <Link variant="plain" _hover={{ textDecoration: "underline", color: "blue.600", }}href={`/${user.id}`}>{user.email}</Link>
             </li>
           )
         })}
       </ul>
-    </div>
+    </Box>
   )
 }
 
