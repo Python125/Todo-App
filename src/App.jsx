@@ -40,7 +40,7 @@ function App() {
 
   return (
     <Box textAlign='center'>
-      <Text fontWeight='bold' fontSize='2xl'>Login to your account</Text>
+      <Text fontWeight='bold' fontSize='2xl'>Add a new username</Text>
       <form onSubmit={submitUser}>
         <Input variant='subtle' width='200px' marginTop='15px' type='text' value={userInput} onChange={addUser} />
         <Button variant='surface' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' type="submit" onClick={submitUser}>Add</Button>
