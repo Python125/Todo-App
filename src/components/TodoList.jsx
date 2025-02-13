@@ -31,7 +31,6 @@ function TodoList({ userId }) {
             setTodos(updatedTodos);
             setUser(response.data.email);
         };
-
         fetchTodos();
 
         const interval = setInterval(() => {
